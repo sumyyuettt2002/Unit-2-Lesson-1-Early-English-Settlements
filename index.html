@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Early English Settlements — Lesson 6</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --parchment: #FFFCF0;
+  --roanoke:    #2ECC71;
+  --roanoke-dk: #1E8449;
+  --james:      #3498DB;
+  --james-dk:   #1B4F72;
+  --plymouth:   #F39C12;
+  --plymouth-dk:#D35400;
+  --vocab:      #9B59B6;
+  --vocab-dk:   #6C3483;
+  --quiz-red:   #E74C3C;
+  --quiz-dk:    #C0392B;
+  --text-main:  #2C3E50;
+  --gold:       #F1C40F;
+  --correct:    #10B981;
+  --wrong:      #E74C3C;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body {
+  font-family:'Nunito',sans-serif;
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  background:#12172b;
+  background-image:radial-gradient(ellipse at 10% 10%,#1a2744 0%,transparent 55%),radial-gradient(ellipse at 90% 90%,#0d2137 0%,transparent 55%);
+}
+.app{width:100%;max-width:880px;background:var(--parchment);border-radius:28px;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.08);}
+.topbar{background:var(--text-main);padding:13px 28px;display:flex;align-items:center;justify-content:space-between;}
+.topbar-title{font-family:'Fredoka One',cursive;color:white;font-size:1.1rem;display:flex;align-items:center;gap:8px;}
+.score-pill{background:var(--gold);color:var(--text-main);font-family:'Fredoka One',cursive;font-size:1rem;padding:5px 18px;border-radius:99px;white-space:nowrap;}
+.prog-wrap{height:7px;background:#dce0e5;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),#E67E22);transition:width .5s cubic-bezier(.4,0,.2,1);}
+.slides-wrap{position:relative;}
+.slide{display:none;padding:34px 42px 26px;animation:fadeIn .35s ease;min-height:490px;}
+.slide.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateX(18px);}to{opacity:1;transform:translateX(0);}}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:99px;font-family:'Fredoka One',cursive;font-size:.78rem;letter-spacing:.4px;text-transform:uppercase;color:white;margin-bottom:12px;}
+.b-intro{background:#7F8C8D;}.b-vocab{background:var(--vocab);}.b-roanoke{background:var(--roanoke-dk);}.b-james{background:var(--james-dk);}.b-ply{background:var(--plymouth-dk);}.b-quiz{background:var(--quiz-red);}.b-sum{background:var(--text-main);}
+.h1{font-family:'Fredoka One',cursive;font-size:2.35rem;color:var(--text-main);line-height:1.15;margin-bottom:6px;}
+.h2{font-family:'Fredoka One',cursive;font-size:1.65rem;color:var(--text-main);margin-bottom:14px;}
+.sp{font-size:1rem;color:#444;line-height:1.65;margin-bottom:10px;}
+.title-center{text-align:center;padding-top:26px;}
+.big-float{font-size:5.5rem;display:block;margin-bottom:12px;animation:floaty 3s ease-in-out infinite;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+.title-sub{font-size:1.15rem;color:#555;font-weight:700;margin-bottom:24px;font-style:italic;}
+.chip-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+.chip{padding:10px 22px;border-radius:99px;color:white;font-family:'Fredoka One',cursive;font-size:1.05rem;box-shadow:0 4px 14px rgba(0,0,0,0.18);}
+.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+.vcard{background:white;border-radius:18px;padding:22px 18px;text-align:center;box-shadow:0 3px 14px rgba(0,0,0,0.09);transition:transform .2s;}
+.vcard:hover{transform:translateY(-4px);}
+.v-icon{font-size:2.6rem;margin-bottom:10px;}
+.v-word{font-family:'Fredoka One',cursive;font-size:1.15rem;color:var(--vocab);margin-bottom:8px;}
+.v-def{font-size:.88rem;color:#555;line-height:1.55;}
+.icard{background:white;border-radius:16px;padding:15px 18px;margin-bottom:11px;box-shadow:0 2px 10px rgba(0,0,0,0.07);display:flex;align-items:flex-start;gap:13px;border-left:5px solid;}
+.ic-icon{font-size:1.8rem;flex-shrink:0;line-height:1.2;}
+.ic-title{font-family:'Fredoka One',cursive;font-size:.98rem;color:var(--text-main);margin-bottom:3px;}
+.ic-body{font-size:.91rem;color:#444;line-height:1.55;}
+.hbox{border-radius:16px;padding:15px 18px;margin:11px 0;display:flex;gap:13px;align-items:flex-start;}
+.hg{background:#D5F5E3;border:2px solid var(--roanoke);}.hb{background:#D6EAF8;border:2px solid var(--james);}.ho{background:#FDEBD0;border:2px solid var(--plymouth);}.hr{background:#FADBD8;border:2px solid var(--quiz-red);}.hp{background:#EBE0F5;border:2px solid var(--vocab);}.hd{background:#1A252F;border:2px solid #0d1a24;}
+.hbox-icon{font-size:1.75rem;flex-shrink:0;}
+.hbox-text{font-size:.95rem;color:#333;line-height:1.6;}
+.hd .hbox-text{color:var(--gold);}
+.hbox-text strong{display:block;font-size:.98rem;margin-bottom:3px;}
+.tcol{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:13px 0;}
+.timeline{display:flex;align-items:stretch;background:white;border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.07);margin:13px 0;}
+.tl-item{flex:1;padding:16px;text-align:center;border-right:2px solid #eee;}
+.tl-item:last-child{border-right:none;}
+.tl-year{font-family:'Fredoka One',cursive;font-size:1.45rem;}
+.tl-name{font-weight:800;font-size:.92rem;margin:2px 0;}
+.tl-det{font-size:.78rem;color:#777;}
+.ebox{background:white;border-radius:16px;padding:22px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.07);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.ebox .be{font-size:3.8rem;}
+.ebox .el{font-size:.82rem;color:#888;font-style:italic;line-height:1.45;}
+.erow{display:flex;gap:10px;font-size:1.7rem;margin:8px 0;flex-wrap:wrap;}
+.mystery{background:#1A252F;border-radius:18px;padding:22px;text-align:center;margin:14px 0;}
+.mword{font-family:'Fredoka One',cursive;font-size:2.5rem;color:var(--gold);letter-spacing:10px;animation:flicker 4s infinite;}
+.msub{color:#aaa;font-size:.87rem;margin-top:6px;}
+@keyframes flicker{0%,88%,100%{opacity:1;}90%{opacity:.25;}92%{opacity:1;}94%{opacity:.5;}96%{opacity:1;}}
+.quiz-hdr{border-radius:18px;padding:17px 22px;color:white;margin-bottom:18px;display:flex;align-items:center;gap:14px;}
+.qh-icon{font-size:2.4rem;}
+.qh-txt h3{font-family:'Fredoka One',cursive;font-size:1.35rem;}
+.qh-txt p{font-size:.87rem;opacity:.88;}
+.q-block{background:white;border-radius:18px;padding:20px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+.q-text{font-family:'Fredoka One',cursive;font-size:1.08rem;color:var(--text-main);margin-bottom:13px;display:flex;gap:11px;align-items:flex-start;}
+.qnum{color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.95rem;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.opt-btn{padding:10px 13px;border-radius:12px;border:2.5px solid #E5E7EB;background:#F9FAFB;font-family:'Nunito',sans-serif;font-size:.91rem;font-weight:700;color:var(--text-main);cursor:pointer;text-align:left;transition:all .18s;line-height:1.4;}
+.opt-btn:hover:not(:disabled){border-color:var(--quiz-red);background:#FEF2F2;transform:translateY(-1px);}
+.opt-btn.ans-c{background:#D1FAE5;border-color:var(--correct);color:#065F46;}
+.opt-btn.ans-w{background:#FEE2E2;border-color:var(--wrong);color:#991B1B;}
+.opt-btn:disabled{cursor:default;}
+.q-fb{margin-top:10px;padding:8px 13px;border-radius:10px;font-weight:800;font-size:.9rem;display:none;line-height:1.4;}
+.fb-c{display:block;background:#D1FAE5;color:#065F46;}
+.fb-w{display:block;background:#FEE2E2;color:#991B1B;}
+.nav-bar{padding:17px 42px;border-top:2px solid #EEE;display:flex;align-items:center;justify-content:space-between;}
+.nav-prev{padding:10px 24px;background:#F1F2F3;border:none;border-radius:13px;font-family:'Fredoka One',cursive;font-size:1rem;color:#888;cursor:pointer;transition:all .18s;}
+.nav-prev:hover:not(:disabled){background:#E2E3E5;color:#555;}
+.nav-prev:disabled{opacity:.4;cursor:default;}
+.nav-ctr{font-family:'Fredoka One',cursive;font-size:1rem;color:#BBB;}
+.nav-next{padding:10px 26px;background:var(--text-main);border:none;border-radius:13px;font-family:'Fredoka One',cursive;font-size:1rem;color:white;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,0.18);transition:all .18s;}
+.nav-next:hover:not(:disabled){background:#1A252F;transform:translateY(-2px);}
+.nav-next:disabled{background:#BDC3C7;cursor:not-allowed;transform:none;box-shadow:none;}
+.final-c{text-align:center;padding-top:16px;}
+.trophy-e{font-size:5rem;display:block;animation:bounce 1.3s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-18px) scale(1.1);}}
+.final-num{font-family:'Fredoka One',cursive;font-size:3.3rem;color:var(--text-main);margin:5px 0;}
+.final-msg{font-size:1.1rem;color:#555;margin-bottom:18px;font-weight:700;}
+.stars-row{font-size:2.3rem;margin-bottom:10px;}
+.sgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;margin-top:14px;}
+.scard{border-radius:16px;padding:15px;color:white;text-align:center;}
+.sc-e{font-size:1.9rem;}.sc-n{font-family:'Fredoka One',cursive;font-size:1.05rem;margin:3px 0;}.sc-f{font-size:.8rem;opacity:.9;line-height:1.5;}
+.conf-wrap{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:998;}
+.conf-p{position:absolute;border-radius:3px;animation:confDrop linear forwards;}
+@keyframes confDrop{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+.restart-btn{margin:18px auto 0;display:inline-block;padding:11px 26px;background:var(--text-main);border:none;border-radius:13px;font-family:'Fredoka One',cursive;font-size:1rem;color:white;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,0.18);transition:all .18s;}
+.restart-btn:hover{background:#1A252F;transform:translateY(-2px);}
+/* READ TO ME */
+.read-btn{position:fixed;bottom:30px;right:30px;z-index:9999;background:var(--gold);color:var(--text-main);border:none;border-radius:99px;padding:14px 26px;font-family:'Fredoka One',cursive;font-size:1.05rem;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,0.3);transition:all .2s;white-space:nowrap;}
+.read-btn:hover{transform:scale(1.07);background:#e6b800;}
+.read-btn.playing{background:#E74C3C;color:white;}
+@media(max-width:620px){
+  .slide{padding:22px 18px 18px;}.h1{font-size:1.7rem;}.h2{font-size:1.4rem;}
+  .vgrid,.tcol,.opts,.sgrid{grid-template-columns:1fr;}
+  .chip-row{flex-direction:column;align-items:center;}
+  .nav-bar{padding:14px 18px;}
+  .read-btn{bottom:16px;right:16px;padding:11px 18px;font-size:.95rem;}
+}
+</style>
+</head>
+<body>
+<div class="app" id="theApp">
+  <div class="topbar">
+    <div class="topbar-title">🗺️ Lesson 6 — Early English Settlements</div>
+    <div class="score-pill" id="scorePill">⭐ 0 / 0</div>
+  </div>
+  <div class="prog-wrap"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <div class="slides-wrap" id="slidesWrap"></div>
+  <div class="nav-bar">
+    <button class="nav-prev" id="prevBtn" onclick="navGo(-1)">← Back</button>
+    <span class="nav-ctr" id="navCtr">1 / 22</span>
+    <button class="nav-next" id="nextBtn" onclick="navGo(1)">Next →</button>
+  </div>
+</div>
+
+<button class="read-btn" id="readBtn" onclick="toggleAudio()">🔊 Read to Me</button>
+<div class="conf-wrap" id="confWrap"></div>
+
+<script>
+/* ── AUDIO ── */
+var activeAudio = null;
+
+function toggleAudio() {
+  if (activeAudio) {
+    activeAudio.pause();
+    activeAudio = null;
+    setReadBtn(false);
+    return;
+  }
+  var num = String(cur + 1).padStart(2, '0');
+  var a = new Audio('slide_' + num + '.mp3');
+  a.onended = function() { activeAudio = null; setReadBtn(false); };
+  a.onerror = function() {
+    activeAudio = null; setReadBtn(false);
+    var b = document.getElementById('readBtn');
+    b.textContent = '❌ No audio found';
+    setTimeout(function(){ b.textContent = '🔊 Read to Me'; b.classList.remove('playing'); }, 2500);
+  };
+  a.play().then(function(){
+    activeAudio = a;
+    setReadBtn(true);
+  }).catch(function(){
+    activeAudio = null; setReadBtn(false);
+  });
+}
+
+function stopAudio() {
+  if (activeAudio) { activeAudio.pause(); activeAudio = null; }
+  setReadBtn(false);
+}
+
+function setReadBtn(on) {
+  var b = document.getElementById('readBtn');
+  if (!b) return;
+  b.textContent = on ? '⏹ Stop' : '🔊 Read to Me';
+  on ? b.classList.add('playing') : b.classList.remove('playing');
+}
+
+/* ── STATE ── */
+var cur = 0, corr = 0, totalQ = 0;
+var answered = {};
+
+/* ── SLIDES ── */
+var SLIDES = [
+{type:'title'},
+{type:'info',badge:['b-intro','📖 Introduction'],h2:'Three Brave Settlements',html:'<p class="sp">Long ago, people in England made a very brave choice. They packed everything they owned, climbed onto small wooden ships, and sailed across the huge Atlantic Ocean! They were hoping to find a better life and build new communities called <strong>settlements</strong>.</p><div class="timeline"><div class="tl-item"><div class="tl-year" style="color:var(--roanoke)">1585</div><div class="tl-name">🌿 Roanoke</div><div class="tl-det">North Carolina coast</div></div><div class="tl-item"><div class="tl-year" style="color:var(--james)">1607</div><div class="tl-name">⚓ Jamestown</div><div class="tl-det">Virginia</div></div><div class="tl-item"><div class="tl-year" style="color:var(--plymouth)">1620</div><div class="tl-name">🌾 Plymouth</div><div class="tl-det">Massachusetts</div></div></div><div class="hbox hp"><div class="hbox-icon">🤔</div><div class="hbox-text"><strong>Big Question:</strong> What challenges did these settlers face? Why did some settlements survive while others did not?</div></div>'},
+{type:'vocab',badge:['b-vocab','📚 Vocabulary'],h2:'Words to Know — Part 1',cards:[{icon:'🏘️',word:'colonist',def:'A person who moves to live in a colony — a new community built in a new land.'},{icon:'🏠',word:'settlement',def:'A small community created by settlers in a new territory far from their home.'}]},
+{type:'vocab',badge:['b-vocab','📚 Vocabulary'],h2:'Words to Know — Part 2',cards:[{icon:'👑',word:'monarchy',def:'A type of government where the ruler is a king or queen who inherits their power.'},{icon:'🗳️',word:'democratic',def:'A type of government that gives people the power to rule themselves, often by voting.'}]},
+{type:'vocab',badge:['b-vocab','📚 Vocabulary'],h2:'Words to Know — Part 3',cards:[{icon:'🏛️',word:'representative government',def:'A government where citizens elect leaders who then make decisions on their behalf.'},{icon:'📜',word:'Mayflower Compact',def:'A set of rules written by the Pilgrims to help them live together peacefully.'}]},
+{type:'quiz',section:'Vocabulary Check! 📚',color:'var(--vocab)',numcolor:'var(--vocab)',questions:[{q:'What do we call a person who moves to live in a new colony?',opts:['colonist','monarch','burgess','pilgrim'],ans:0,exp:'✅ A colonist is a person who settles in a colony!'},{q:'What kind of government is a MONARCHY?',opts:['People vote for all decisions','A king or queen is the ruler','Citizens elect their leaders','Everyone writes the rules'],ans:1,exp:'✅ In a monarchy, a king or queen is the ruler — and they inherit that power!'}]},
+{type:'info',badge:['b-roanoke','🌿 Settlement 1: Roanoke'],h2:'England Wants a Colony!',html:'<p class="sp">In the 1500s, Spain was super powerful. Its ships brought treasures from colonies in the Americas. England wanted to be powerful too!</p><div class="tcol"><div class="icard" style="border-color:var(--roanoke)"><div class="ic-icon">⚔️</div><div><div class="ic-title">Sir Walter Raleigh</div><div class="ic-body">A bold sea captain and friend of Queen Elizabeth I. He believed England needed American colonies. In 1584, he sent two ships to explore North America!</div></div></div><div class="icard" style="border-color:var(--roanoke)"><div class="ic-icon">👑</div><div><div class="ic-title">Queen Elizabeth I</div><div class="ic-body">The Queen of England. She supported Raleigh\'s plan to explore and settle in North America.</div></div></div></div><div class="hbox hg"><div class="hbox-icon">🏝️</div><div class="hbox-text"><strong>What They Found!</strong> Raleigh\'s ships landed on an island near present-day North Carolina named <strong>Roanoke</strong>. It had fish, animals, fruits, vegetables, and friendly people. It seemed perfect!</div></div>'},
+{type:'info',badge:['b-roanoke','🌿 Settlement 1: Roanoke'],h2:'The Colony Struggles 😟',html:'<div class="icard" style="border-color:var(--quiz-red)"><div class="ic-icon">❌</div><div><div class="ic-title">First Try — 1585 — FAILS!</div><div class="ic-body">Few settlers were farmers! Food ran out. Fights broke out with the Roanoke Native Americans. The settlers gave up and sailed home.</div></div></div><div class="icard" style="border-color:var(--roanoke)"><div class="ic-icon">🌱</div><div><div class="ic-title">Second Try — 1587</div><div class="ic-body">Raleigh sent 150+ new settlers including farmers and skilled workers. Captain John White went back to England for supplies. But England was at WAR with Spain — no ships could return for 3 years!</div></div></div><div class="erow">🚢 ⚔️ 🏴‍☠️ ❌ 🚫 ⏳</div>'},
+{type:'info',badge:['b-roanoke','🌿 Settlement 1: Roanoke'],h2:'The Lost Colony 👻',html:'<p class="sp">When Captain John White finally returned to Roanoke in 1590... <strong>everyone had vanished!</strong> Every house — gone. Every person — gone.</p><div class="mystery"><div class="mword">CROATOAN</div><div class="msub">The ONLY clue — carved into a wooden gatepost at the ruined fort</div></div><div class="hbox hr"><div class="hbox-icon">❓</div><div class="hbox-text"><strong>What happened?</strong> White thought settlers might have moved to the island of Croatoan. But a terrible storm stopped him from searching.</div></div><div class="hbox hd"><div class="hbox-icon">🔍</div><div class="hbox-text"><strong>To this day, NO ONE knows what happened to the Roanoke colonists.</strong> That is why it is called the "Lost Colony." 👻</div></div>'},
+{type:'quiz',section:'Roanoke Quiz! 🌿',color:'var(--roanoke-dk)',numcolor:'var(--roanoke-dk)',questions:[{q:'What was the ONLY clue when the Roanoke settlers disappeared?',opts:['A pile of gold coins','The word CROATOAN carved into a gatepost','A letter written to England','A painted map of the island'],ans:1,exp:'✅ The word CROATOAN was carved into a wooden gatepost!'},{q:"Why couldn't Captain John White return to Roanoke right away?",opts:['His ship sank in a storm','England was at war with Spain','The settlers told him not to come','He forgot where the island was'],ans:1,exp:'✅ England was at war with Spain so ships could not return for 3 years!'}]},
+{type:'info',badge:['b-james','⚓ Settlement 2: Jamestown'],h2:'England Tries Again!',html:'<p class="sp">More than 20 years after Roanoke, England tried again — this time determined to succeed!</p><div class="tcol"><div class="icard" style="border-color:var(--james)"><div class="ic-icon">👑</div><div><div class="ic-title">King James I — A Monarchy</div><div class="ic-body">England was a <strong>monarchy</strong>. People did NOT choose King James — he inherited the throne. He gave wealthy men permission to start a colony in Virginia.</div></div></div><div class="icard" style="border-color:var(--james)"><div class="ic-icon">💰</div><div><div class="ic-title">Their Big Goal: GOLD!</div><div class="ic-body">In May 1607, <strong>105 men</strong> arrived in Virginia hoping to find gold and get rich!</div></div></div></div><div class="hbox hb"><div class="hbox-icon">⚓</div><div class="hbox-text"><strong>A Good Spot!</strong> They built on a peninsula near a deep river and named their settlement <strong>Jamestown</strong> in honor of King James I.</div></div>'},
+{type:'info',badge:['b-james','⚓ Settlement 2: Jamestown'],h2:'Big Problems! 😰',html:'<div class="icard" style="border-color:var(--quiz-red)"><div class="ic-icon">🦟</div><div><div class="ic-title">Built on a Swamp!</div><div class="ic-body">Jamestown was built on a marsh. The water was dirty and salty. Mosquitoes spread a deadly disease called <strong>malaria</strong>. Many settlers died!</div></div></div><div class="icard" style="border-color:var(--quiz-red)"><div class="ic-icon">🍽️</div><div><div class="ic-title">The Starving Time — Winter 1609–1610</div><div class="ic-body">Food ran out completely. Settlers had to eat horses and dogs. Hundreds died. Only about <strong>60</strong> settlers survived!</div></div></div><div class="hbox hr"><div class="hbox-icon">😱</div><div class="hbox-text">By the end of 1607, disease and hunger had already killed many of the original 105 settlers.</div></div>'},
+{type:'info',badge:['b-james','⚓ Settlement 2: Jamestown'],h2:'Captain Smith & Powhatan 🤝',html:'<div class="tcol"><div><div class="icard" style="border-color:var(--james)"><div class="ic-icon">💪</div><div><div class="ic-title">Captain John Smith</div><div class="ic-body">Smith became leader and said: <em>"If you don\'t work, you don\'t eat!"</em> He made EVERYONE help. His tough rules helped save the colony.</div></div></div><div class="icard" style="border-color:var(--roanoke)"><div class="ic-icon">🌽</div><div><div class="ic-title">Chief Powhatan</div><div class="ic-body">Chief <strong>Powhatan</strong> led nearby Algonquian tribes. His people brought corn, beans, and squash to trade with the starving colonists. This food saved lives!</div></div></div></div><div class="ebox" style="background:#D6EAF8;"><div class="be">🏹👧🏽💍🤝</div><div class="el"><strong>Pocahontas</strong> — Powhatan\'s daughter — helped connect the two groups. She later married colonist John Rolfe and traveled to England!</div></div></div>'},
+{type:'info',badge:['b-james','⚓ Settlement 2: Jamestown'],h2:'Jamestown Survives! 🎉',html:'<div class="icard" style="border-color:var(--plymouth)"><div class="ic-icon">🌿</div><div><div class="ic-title">Tobacco — Virginia\'s Gold!</div><div class="ic-body">Colonist <strong>John Rolfe</strong> grew a new type of tobacco. By 1614, settlers traded tobacco for money and supplies. People in England loved it! Tobacco became Virginia\'s <strong>"gold."</strong></div></div></div><div class="icard" style="border-color:var(--james)"><div class="ic-icon">🏛️</div><div><div class="ic-title">The House of Burgesses — 1619</div><div class="ic-body">In 1619, men elected <strong>representatives</strong> to make laws. This was the <strong>first representative government</strong> in an American colony! Virginia\'s government was now more <strong>democratic</strong> than England\'s!</div></div></div><div class="hbox hr"><div class="hbox-icon">⚔️</div><div class="hbox-text"><strong>Conflict Returns:</strong> As settlers took more Native American land, peace ended. In 1622, a major attack killed 347 colonists.</div></div>'},
+{type:'quiz',section:'Jamestown Quiz! ⚓',color:'var(--james-dk)',numcolor:'var(--james-dk)',questions:[{q:'What was a BIG problem with where Jamestown was built?',opts:['Too far from the ocean','Built on a swampy marsh with mosquitoes!','Too many wild animals','It was too cold'],ans:1,exp:'✅ Jamestown was built on a marsh — dirty water and mosquitoes spread deadly malaria!'},{q:"What crop saved Jamestown and was called Virginia's gold?",opts:['Corn','Cotton','Wheat','Tobacco'],ans:3,exp:'✅ John Rolfe grew tobacco and people in England loved it! It saved the colony.'},{q:'What was the first representative government in an American colony?',opts:['The Mayflower Compact','The House of Burgesses','The Royal Council','The English Parliament'],ans:1,exp:'✅ The House of Burgesses (1619) was the first representative government in an American colony!'}]},
+{type:'info',badge:['b-ply','🌾 Settlement 3: Plymouth'],h2:'The Pilgrims Seek Freedom! 🕊️',html:'<div class="hbox hr"><div class="hbox-icon">⛪</div><div class="hbox-text"><strong>The Big Problem:</strong> King James I said everyone in England had to belong to the Church of England. But <strong>Separatists</strong> wanted their own independent church. They refused!</div></div><div class="hbox ho"><div class="hbox-icon">🕊️</div><div class="hbox-text"><strong>Their Solution:</strong> The Separatists decided to sail to a new land where they could practice their own religion freely. They became known as the <strong>Pilgrims</strong>.</div></div><div class="icard" style="border-color:var(--plymouth)"><div class="ic-icon">🚢</div><div><div class="ic-title">September 1620 — Setting Sail!</div><div class="ic-body"><strong>102 people</strong> sailed from England on the <em>Mayflower</em>. After more than <strong>2 months</strong> at sea, they reached Cape Cod in what is now Massachusetts!</div></div></div><div class="erow">🚢🌊🌊🌊🌊🌊🗺️🏝️</div>'},
+{type:'info',badge:['b-ply','🌾 Settlement 3: Plymouth'],h2:'The Mayflower Compact 📜',html:'<div class="hbox ho"><div class="hbox-icon">📜</div><div class="hbox-text"><strong>The Mayflower Compact</strong> was a written agreement — a set of rules created while still on their ship. They promised to follow fair laws and work together peacefully.</div></div><div class="tcol"><div class="icard" style="border-color:var(--plymouth)"><div class="ic-icon">✍️</div><div><div class="ic-title">Why Was It Important?</div><div class="ic-body">One of the first times in America that people agreed to govern themselves with written rules — not just obey a king!</div></div></div><div class="icard" style="border-color:var(--plymouth)"><div class="ic-icon">🏛️</div><div><div class="ic-title">First Governor!</div><div class="ic-body">After signing, the Pilgrims elected <strong>John Carver</strong> as their first governor. They chose their own leader!</div></div></div></div><div class="hbox ho"><div class="hbox-icon">🧭</div><div class="hbox-text">After exploring, the Pilgrims landed at a place they named <strong>Plymouth</strong> in Massachusetts. They built houses and a meeting hall called the <strong>Common House</strong>.</div></div>'},
+{type:'info',badge:['b-ply','🌾 Settlement 3: Plymouth'],h2:'A Hard Winter & New Friends ❄️',html:'<div class="hbox hr"><div class="hbox-icon">❄️</div><div class="hbox-text"><strong>The First Winter Was Terrible:</strong> The Pilgrims landed too late to plant food. By spring, nearly <strong>HALF</strong> of the 102 Pilgrims had died from disease and starvation!</div></div><div class="icard" style="border-color:var(--roanoke)"><div class="ic-icon">🌽</div><div><div class="ic-title">Tisquantum (Squanto) — A True Hero! 🦸</div><div class="ic-body">In March 1621, <strong>Tisquantum</strong> (called Squanto) visited the Pilgrims. He spoke English, taught them how to plant corn, and showed them how to survive!</div></div></div><div class="icard" style="border-color:var(--plymouth)"><div class="ic-icon">🤝</div><div><div class="ic-title">Peace Treaty with the Wampanoags</div><div class="ic-body">Wampanoag Chief <strong>Massasoit</strong> arranged a peace treaty. They promised NOT to fight and agreed to trade food and goods.</div></div></div>'},
+{type:'info',badge:['b-ply','🌾 Settlement 3: Plymouth'],h2:'The Harvest Celebration 🍂',html:'<div class="icard" style="border-color:var(--plymouth)"><div class="ic-icon">🦃</div><div><div class="ic-title">The First Thanksgiving!</div><div class="ic-body">In fall 1621, the Pilgrims held a feast to celebrate their harvest. Chief Massasoit arrived with 90 armed men, thinking the gunfire was an attack! But the Wampanoags joined the feast. For <strong>3 days</strong>, both groups celebrated peacefully!</div></div></div><div class="hbox ho"><div class="hbox-icon">📅</div><div class="hbox-text">Today, Americans celebrate <strong>Thanksgiving Day</strong> in memory of this harvest feast. However, for many Native Americans, Thanksgiving is a day of sadness — the peace did not last, and many Native Americans eventually lost their lands.</div></div><div class="hbox hb"><div class="hbox-icon">📈</div><div class="hbox-text"><strong>William Bradford</strong> was elected governor and led Plymouth for more than 30 years. More ships brought new settlers and the colony kept growing!</div></div>'},
+{type:'quiz',section:'Plymouth Quiz! 🌾',color:'var(--plymouth-dk)',numcolor:'var(--plymouth-dk)',questions:[{q:'Why did the Pilgrims leave England and sail to America?',opts:['To find gold','To escape a terrible war','To practice their own religion freely','To find better farmland'],ans:2,exp:'✅ The Pilgrims were Separatists who wanted religious freedom!'},{q:'What was the Mayflower Compact?',opts:['A type of sailing ship','A peace treaty with Native Americans','A set of rules the Pilgrims wrote to live peacefully','A letter to King James'],ans:2,exp:'✅ The Mayflower Compact was a written set of rules — one of the first examples of self-government in America!'},{q:'Who taught the Pilgrims how to plant corn and helped them survive?',opts:['Captain John Smith','Chief Powhatan','Chief Massasoit','Tisquantum (Squanto)'],ans:3,exp:'✅ Tisquantum (Squanto) spoke English and stayed with the Pilgrims — teaching them to farm and survive!'}]},
+{type:'info',badge:['b-sum','📋 Summary'],h2:'What We Learned!',html:'<div class="icard" style="border-color:var(--roanoke)"><div class="ic-icon">🌿</div><div><div class="ic-title">Roanoke (1585) — The Lost Colony</div><div class="ic-body">England\'s first settlement. Settlers vanished without a trace. The only clue: CROATOAN carved in a gatepost. Still a mystery today!</div></div></div><div class="icard" style="border-color:var(--james)"><div class="ic-icon">⚓</div><div><div class="ic-title">Jamestown (1607) — The Survivor</div><div class="ic-body">Survived disease, starvation, and conflict. Tobacco saved the economy. The House of Burgesses was America\'s first representative government!</div></div></div><div class="icard" style="border-color:var(--plymouth)"><div class="ic-icon">🌾</div><div><div class="ic-title">Plymouth (1620) — The Pilgrims</div><div class="ic-body">Pilgrims sought religious freedom. Wrote the Mayflower Compact. With help from Squanto and the Wampanoags, they survived and celebrated the first Thanksgiving!</div></div></div><div class="hbox hp"><div class="hbox-icon">💡</div><div class="hbox-text"><strong>Answer to our Big Question:</strong> Settlements survived when settlers worked together, found food, made peace with Native Americans, and showed strong leadership!</div></div>'},
+{type:'final'}
+];
+
+SLIDES.forEach(function(s){ if(s.type==='quiz') totalQ += s.questions.length; });
+
+/* ── BUILD ── */
+function buildSlide(s,i){
+  if(s.type==='title') return '<div class="title-center"><span class="big-float">🗺️</span><h1 class="h1">Early English Settlements</h1><p class="title-sub">"What challenges did the first English colonies face?"</p><div class="chip-row"><div class="chip" style="background:var(--roanoke-dk)">🌿 Roanoke</div><div class="chip" style="background:var(--james-dk)">⚓ Jamestown</div><div class="chip" style="background:var(--plymouth-dk)">🌾 Plymouth</div></div><div class="hbox hp" style="margin-top:22px;text-align:left;"><div class="hbox-icon">💡</div><div class="hbox-text"><strong>How to use this lesson:</strong> Read each slide carefully. After learning new ideas, you will get quiz questions! Click <strong>🔊 Read to Me</strong> (bottom right) to hear the slide read aloud. Click <strong>Next →</strong> to begin!</div></div></div>';
+  if(s.type==='info')  return '<div class="badge '+s.badge[0]+'">'+s.badge[1]+'</div><h2 class="h2">'+s.h2+'</h2>'+s.html;
+  if(s.type==='vocab') {
+    var c=s.cards.map(function(x){return '<div class="vcard"><div class="v-icon">'+x.icon+'</div><div class="v-word">'+x.word+'</div><div class="v-def">'+x.def+'</div></div>';}).join('');
+    return '<div class="badge '+s.badge[0]+'">'+s.badge[1]+'</div><h2 class="h2">'+s.h2+'</h2><div class="vgrid">'+c+'</div>';
+  }
+  if(s.type==='quiz')  return buildQuiz(s,i);
+  if(s.type==='final') return buildFinal();
+  return '';
+}
+
+function buildQuiz(s,si){
+  if(!answered[si]) answered[si]={};
+  var qH=s.questions.map(function(q,qi){
+    var ua=answered[si][qi], done=ua!==undefined;
+    var oH=q.opts.map(function(o,oi){
+      var cl=''; if(done){if(oi===q.ans)cl='ans-c';else if(oi===ua)cl='ans-w';}
+      return '<button class="opt-btn '+cl+'" onclick="ansQ('+si+','+qi+','+oi+')" '+(done?'disabled':'')+'>'+String.fromCharCode(65+oi)+') '+o+'</button>';
+    }).join('');
+    var fc='',ft=''; if(done){var ok=ua===q.ans;fc=ok?'fb-c':'fb-w';ft=ok?q.exp:'❌ Not quite! '+q.exp;}
+    return '<div class="q-block"><div class="q-text"><div class="qnum" style="background:'+s.numcolor+'">'+(qi+1)+'</div><div>'+q.q+'</div></div><div class="opts">'+oH+'</div><div class="q-fb '+fc+'" id="fb-'+si+'-'+qi+'">'+ft+'</div></div>';
+  }).join('');
+  return '<div class="quiz-hdr" style="background:linear-gradient(135deg,'+s.color+','+s.color+'CC)"><div class="qh-icon">🧠</div><div class="qh-txt"><h3>Check Your Learning!</h3><p>'+s.section+' — Answer all questions to move on.</p></div></div>'+qH;
+}
+
+function buildFinal(){
+  var pct=totalQ>0?Math.round(corr/totalQ*100):0;
+  var tr='🏆',st='⭐⭐⭐⭐⭐',mg='Amazing! You are a history superstar!';
+  if(pct<60){tr='📚';st='⭐⭐';mg='Good try! Review the lesson and try again!';}
+  else if(pct<75){tr='🥈';st='⭐⭐⭐';mg='Nice work! You are learning a lot!';}
+  else if(pct<90){tr='🥇';st='⭐⭐⭐⭐';mg='Great job! You really know your settlements!';}
+  return '<div class="final-c"><span class="trophy-e">'+tr+'</span><div class="stars-row">'+st+'</div><div class="final-num">'+corr+' / '+totalQ+'</div><div class="final-msg">'+mg+'</div><div class="sgrid"><div class="scard" style="background:var(--roanoke-dk)"><div class="sc-e">🌿</div><div class="sc-n">Roanoke</div><div class="sc-f">England\'s first settlement. The settlers disappeared. The Lost Colony — still a mystery!</div></div><div class="scard" style="background:var(--james-dk)"><div class="sc-e">⚓</div><div class="sc-n">Jamestown</div><div class="sc-f">First successful colony. Tobacco saved it. House of Burgesses — first representative government!</div></div><div class="scard" style="background:var(--plymouth-dk)"><div class="sc-e">🌾</div><div class="sc-n">Plymouth</div><div class="sc-f">Pilgrims sought religious freedom. Mayflower Compact. Squanto helped them survive. First Thanksgiving!</div></div></div><button class="restart-btn" onclick="restart()">🔄 Start Over!</button></div>';
+}
+
+/* ── QUIZ LOGIC ── */
+function ansQ(si,qi,chosen){
+  var s=SLIDES[si],q=s.questions[qi];
+  if(!answered[si]) answered[si]={};
+  if(answered[si][qi]!==undefined) return;
+  answered[si][qi]=chosen;
+  var ok=chosen===q.ans;
+  if(ok) corr++;
+  updateScore();
+  var blocks=document.querySelectorAll('#slide-'+si+' .q-block');
+  if(blocks[qi]){
+    blocks[qi].querySelectorAll('.opt-btn').forEach(function(btn,oi){
+      btn.disabled=true;
+      if(oi===q.ans) btn.classList.add('ans-c');
+      else if(oi===chosen) btn.classList.add('ans-w');
+    });
+  }
+  var fb=document.getElementById('fb-'+si+'-'+qi);
+  if(fb){fb.className='q-fb '+(ok?'fb-c':'fb-w');fb.textContent=ok?q.exp:'❌ Not quite! '+q.exp;}
+  var allDone=s.questions.every(function(_,i2){return answered[si][i2]!==undefined;});
+  if(allDone){document.getElementById('nextBtn').disabled=false;confetti();}
+}
+
+/* ── NAV ── */
+function navGo(dir){
+  stopAudio();
+  var old=document.getElementById('slide-'+cur);
+  if(old) old.classList.remove('active');
+  cur=Math.max(0,Math.min(SLIDES.length-1,cur+dir));
+  if(SLIDES[cur].type==='final'){
+    var el=document.getElementById('slide-'+cur);
+    if(el) el.innerHTML=buildFinal();
+    confetti();
+  }
+  var nw=document.getElementById('slide-'+cur);
+  if(nw) nw.classList.add('active');
+  updateNav();
+  document.getElementById('theApp').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function updateNav(){
+  var total=SLIDES.length;
+  document.getElementById('navCtr').textContent=(cur+1)+' / '+total;
+  document.getElementById('progFill').style.width=(cur/(total-1)*100)+'%';
+  var prev=document.getElementById('prevBtn'),next=document.getElementById('nextBtn');
+  prev.disabled=(cur===0);
+  if(cur===total-1){next.disabled=true;next.textContent='🎉 Done!';return;}
+  var s=SLIDES[cur];
+  if(s.type==='quiz'){
+    if(!answered[cur]) answered[cur]={};
+    var done=s.questions.every(function(_,qi){return answered[cur][qi]!==undefined;});
+    next.disabled=!done; next.textContent='Next →';
+  } else {
+    next.disabled=false;
+    next.textContent=(cur===total-2)?'See My Score! 🏆':'Next →';
+  }
+}
+
+function updateScore(){document.getElementById('scorePill').textContent='⭐ '+corr+' / '+totalQ;}
+
+/* ── RENDER ── */
+function render(){
+  var wrap=document.getElementById('slidesWrap');
+  wrap.innerHTML='';
+  SLIDES.forEach(function(s,i){
+    var d=document.createElement('div');
+    d.className='slide'+(i===0?' active':'');
+    d.id='slide-'+i;
+    d.innerHTML=buildSlide(s,i);
+    wrap.appendChild(d);
+  });
+  updateNav(); updateScore();
+}
+
+function restart(){cur=0;corr=0;answered={};stopAudio();render();}
+
+/* ── CONFETTI ── */
+function confetti(){
+  var wrap=document.getElementById('confWrap');
+  var cols=['#F1C40F','#E74C3C','#2ECC71','#3498DB','#9B59B6','#E67E22','#1ABC9C','#FF69B4'];
+  for(var i=0;i<55;i++){
+    (function(){
+      var p=document.createElement('div');
+      p.className='conf-p';
+      var sz=6+Math.random()*9;
+      p.style.left=(Math.random()*100)+'%';
+      p.style.width=sz+'px'; p.style.height=sz+'px';
+      p.style.background=cols[Math.floor(Math.random()*cols.length)];
+      p.style.animationDuration=(1.6+Math.random()*2)+'s';
+      p.style.animationDelay=(Math.random()*.5)+'s';
+      p.style.borderRadius=Math.random()>.5?'50%':'3px';
+      wrap.appendChild(p);
+      setTimeout(function(){if(p.parentNode)p.parentNode.removeChild(p);},3200);
+    })();
+  }
+}
+
+render();
+</script>
+</body>
+</html>
